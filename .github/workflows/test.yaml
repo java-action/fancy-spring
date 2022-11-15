@@ -1,9 +1,11 @@
 on:
   pull_request:
-    branch:
+    branches:
       - dev
     types:
       - closed
+
+
 
 jobs:
   CI_CD:
@@ -13,6 +15,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
+        with:
+          ref: ${{github.event.pull_request.base.ref}}
 
       - name: gradle bootJar
         uses: actions/setup-java@v3
