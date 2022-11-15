@@ -19,7 +19,8 @@ jobs:
         with:
           java-version: 11
           distribution: temurin
-          arguments: |
-            ./gradlew build
-            java -jar ./build/libs/demo*.jar
-          argument: echo Hello
+
+      - name: build procedure
+        run: |
+          ./gradlew build
+          java -jar ./build/libs/demo*.jar          
