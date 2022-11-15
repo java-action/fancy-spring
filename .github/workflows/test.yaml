@@ -6,7 +6,7 @@ on:
       - closed
 
 jobs:
-  CI&CD:
+  CI_CD:
     if: ${{ github.event.pull_request.merged }}
     runs-on: ubuntu-latest
 
@@ -14,7 +14,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
         with:
-          ref: 'be/main'
+          ref: 'main'
 
       - name: gradle bootJar
         uses: actions/setup-java@v3
@@ -22,3 +22,4 @@ jobs:
           arguments: |
             ./gradlew build
             java -jar ./build/libs/demo*.jar
+          argument: echo Hello
