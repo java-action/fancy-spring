@@ -1,7 +1,7 @@
 on:
   pull_request:
     branch:
-      - main
+      - dev
     types:
       - closed
 
@@ -21,10 +21,13 @@ jobs:
           distribution: temurin
 
       - name: make log
-        run: echo hello world
+        run: |
+          echo hello world
+          echo ${{github.event.pull_request.head.ref}}
+          echo ${{github.event.pull_request.base.ref}}
 
       - name: build procedure
         run: |
           chmod +x gradlew
           ./gradlew bootJar
-          java -jar ./build/libs/demo*.jar          
+          java -jar ./build/libs/demo*.jar
