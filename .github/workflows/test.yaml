@@ -5,6 +5,8 @@ on:
     types:
       - closed
 
+
+
 jobs:
   CI_CD:
     if: ${{ github.event.pull_request.merged }}
@@ -13,6 +15,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
+        with:
+          ref: ${{github.event.pull_request.base.ref}}
 
       - name: gradle bootJar
         uses: actions/setup-java@v3
