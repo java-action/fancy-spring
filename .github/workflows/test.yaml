@@ -22,6 +22,7 @@ jobs:
 
       - name: make log
         run: |
+          git branch
           echo hello world
           echo ${{github.event.pull_request.head.ref}}
           echo ${{github.event.pull_request.base.ref}}
