@@ -4,6 +4,9 @@ on:
       - dev
     types:
       - closed
+  push:
+    branches:
+      - test
 
 jobs:
   CI_CD:
