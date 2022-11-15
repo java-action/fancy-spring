@@ -25,21 +25,21 @@ jobs:
           HOSTNAME: ${{ secrets.EC2_HOST }}
           USERNAME: ${{ secrets.EC2_USERNAME }}
           PEM: private_key.pem
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_PEM }}
-          script: |
-            whoami
+        run: |
+          echo "$PRIVATE_KEY" > "$PEM" && chmod 400 "$PEM"
+          echo "$HOSTNAME"@"$USERNAME" | sed 's/./& /g'
+          ssh -o StrictHostKeyChecking=no -i "$PEM" ubuntu@ec2-43-200-160-151.ap-northeast-2.compute.amazonaws.com '
+            touch iamin
+            echo Hello > iamin
+          '
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.EC2_HOST }}
+#          username: ${{ secrets.EC2_USERNAME }}
+#          key: ${{ secrets.EC2_PEM }}
+#          script: |
+#            whoami
 
-#        run: |
-#          echo "$PRIVATE_KEY" > "$PEM" && chmod 400 "$PEM"
-#          echo "$HOSTNAME"@"$USERNAME" | sed 's/./& /g'
-#          ssh -o StrictHostKeyChecking=no -i "$PEM" ubuntu@ec2-43-200-160-151.ap-northeast-2.compute.amazonaws.com '
-#            touch iamin
-#            echo Hello > iamin
-#          '
 
 # FTP를 사용하려 했던 흔적
 #
