@@ -23,8 +23,8 @@ jobs:
       - name: make log
         run: |
           echo hello world
-          echo {{github.event.pull_request.head.ref}}
-          echo {{github.event.pull_request.base.ref}}
+          echo ${{github.event.pull_request.head.ref}}
+          echo ${{github.event.pull_request.base.ref}}
 
       - name: build procedure
         run: |
