@@ -26,5 +26,5 @@ jobs:
       - name: build procedure
         run: |
           chmod +x gradlew
-          ./gradlew build
+          ./gradlew bootJar
           java -jar ./build/libs/demo*.jar          
