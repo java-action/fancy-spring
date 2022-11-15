@@ -20,7 +20,11 @@ jobs:
           java-version: 11
           distribution: temurin
 
+      - name: make log
+        run: echo hello world
+
       - name: build procedure
         run: |
+          chmod +x gradlew
           ./gradlew build
           java -jar ./build/libs/demo*.jar          
