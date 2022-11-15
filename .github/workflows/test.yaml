@@ -14,21 +14,32 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
-      - name: gradle bootJar
-        uses: actions/setup-java@v3
-        with:
-          java-version: 11
-          distribution: temurin
-
-      - name: make log
+      - name: ssh connection
         run: |
-          git branch
-          echo hello world
-          echo ${{github.event.pull_request.head.ref}}
-          echo ${{github.event.pull_request.base.ref}}
-
-      - name: build procedure
-        run: |
-          chmod +x gradlew
-          ./gradlew bootJar
-          java -jar ./build/libs/demo*.jar
+          touch key.pem
+          echo ${{ secrets.pem }} > key.pem
+          ssh -i ./key.pem ubuntu@ec2-43-200-160-151.ap-northeast-2.compute.amazonaws.com
+          touch asddf
+# FTP를 사용하려 했던 흔적
+#
+#      - name: gradle bootJar
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: 11
+#          distribution: temurin
+#
+#      - name: make log
+#        run: |
+#          git branch
+#          echo hello world
+## test => dev 상황에서 다음과 같이 출력된다.
+## test
+#          echo ${{github.event.pull_request.head.ref}}
+## dev
+#          echo ${{github.event.pull_request.base.ref}}
+#
+#      - name: build procedure
+#        run: |
+#          chmod +x gradlew
+#          ./gradlew bootJar
+#          java -jar ./build/libs/demo*.jar
