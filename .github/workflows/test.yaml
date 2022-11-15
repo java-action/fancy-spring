@@ -27,10 +27,9 @@ jobs:
           PEM: private_key.pem
         run: |
           echo "$PRIVATE_KEY" > "$PEM" && chmod 400 "$PEM"
-          echo "$HOSTNAME"@"$USERNAME" | sed 's/./& /g'
           ssh -o StrictHostKeyChecking=no -i "$PEM" "$USERNAME"@"$HOSTNAME"  '
-            touch iamin
-            echo Hello > iamin
+            touch iamin2
+            echo Hello > iamin2
           '
 #        uses: appleboy/ssh-action@master
 #        with:
