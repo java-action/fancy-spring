@@ -24,8 +24,16 @@ jobs:
           HOSTNAME: ${{ secrets.EC2_HOST }},
           USERNAME: ${{ secrets.EC2_USERNAME }}
         run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ubuntu@ec2-43-200-160-151.ap-northeast-2.compute.amazonaws.com '
+          echo "$PRIVATE_KEY" > private_key && chmod 400 private_key
+          ssh -o StrictHostKeyChecking=no -i ./private_key ubuntu@ec2-43-200-160-151.ap-northeast-2.compute.amazonaws.com ' 
+
+# 저걸 환경변수가 아니라 그냥으로 바꿔주니까, 됐습니다.
+# 오류가 바뀌었어요
+# 짐작건데 ${} 이런 식으로 해서 masking되는 게 영향을 미친 것 같긴 한데....
+# publickey error가 나거든요?
+# 하.. 야발거 -i
+
+
             touch iamin
             echo Hello > iamin
           '
